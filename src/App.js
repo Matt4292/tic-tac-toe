@@ -28,7 +28,7 @@ function App() {
     }
   }
 
-  function markX(space, board, allSpaces) {
+  function markX(space, board) {
     space.classList.remove("open")
     space.classList.add("x-mark")
     space.parentElement.classList.add("not-open")
@@ -37,7 +37,7 @@ function App() {
     board.classList.add("o-player")
     return
   }
-  function markO(space, board, allSpaces) {
+  function markO(space, board) {
     space.classList.remove("open")
     space.classList.add("o-mark")
     space.parentElement.classList.add("not-open")
@@ -69,17 +69,25 @@ function App() {
       })
     })
 
+    const resetBtn = document.getElementById("resetBtn")
+    console.log(resetBtn.classList)
     if (oWins) {
       message.innerHTML = "O Wins"
+      resetBtn.classList.remove("hidden")
       console.log("O Wins")
     } else if (xWins) {
       message.innerHTML = "X Wins"
+      resetBtn.classList.remove("hidden")
       console.log("X Wins")
     } else if (draw()) {
       message.innerHTML = "Draw"
+      resetBtn.classList.remove("hidden")
       console.log("Draw")
     }
     return
+  }
+  function resetPage() {
+    window.location.reload();
   }
 
   return (
@@ -97,6 +105,7 @@ function App() {
         <div className="box"><div className="open space" onClick={clickhandler}></div></div>
       </div>
       <h1 id="end-message"></h1>
+      <button id="resetBtn" className="hidden" onClick={resetPage}>Reset</button>
     </div>
   );
 }
